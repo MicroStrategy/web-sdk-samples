@@ -11,7 +11,7 @@ search.types().add(EnumDSSXMLObjectTypes.DssXmlTypeFolder.
 The information that you have to fill in is: 
 1. The package
 2. The details of te I-Server session
-3. The GUID of the folder that you want to search through
+3. The GUID of the folder that you want to search through - the sample one used is the Public Objects folder.
 
 Apart from those details the code is ready to run.
 
@@ -45,7 +45,7 @@ public static void main(String[] args) throws WebObjectsException{
 System.out.println("Initiating the session.");
 
 serverSession = factory.getIServerSession();
-serverSession.setServerName("SUP-W-000507"); 
+serverSession.setServerName("SERVER"); 
 serverSession.setServerPort(0);
 serverSession.setProjectName("MicroStrategy Tutorial");
 serverSession.setLogin("Administrator"); 
