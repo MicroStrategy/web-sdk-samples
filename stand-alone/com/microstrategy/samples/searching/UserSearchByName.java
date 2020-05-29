@@ -27,7 +27,7 @@ public class UserSearchByName {
 
 	public static void main(String[] args) {
 		
-		// Connectivity for the intelligence server
+	    // Connectivity for the intelligence server
 	    final String intelligenceServerName = "sup-w-001643.labs.microstrategy.com";
 	    final String projectName = "MicroStrategy Tutorial";
 	    final String microstrategyUsername = "Administrator";
