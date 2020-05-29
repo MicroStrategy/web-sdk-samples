@@ -4,7 +4,7 @@ package com.microstrategy.samples.searching;
  * SDK sample
  * Purpose: to find a user's ID using their name
  * 
- * Notes: The method searchUser can be used as a standalone function.
+ * Notes: The method searchUser can be used as a standalone method.
  * 
  * Based off of KB13809 and modyified to return userID and enhanced for better functionality
  * 
