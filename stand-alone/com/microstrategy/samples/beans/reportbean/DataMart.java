@@ -74,63 +74,62 @@ public class DataMart {
   
   // Simple example to execute a data mart report. Takes into account if he report is prompted.
   public static void executeDataMartWithPrompt(String reportID, WebIServerSession session, String promptAnswer) {
-	  ReportBean rb = (ReportBean)BeanFactory.getInstance().newBean("ReportBean");
+    ReportBean rb = (ReportBean)BeanFactory.getInstance().newBean("ReportBean");
 
-	  // Id of the object we wish to execute
-	  rb.setObjectID(reportID);
+    // Id of the object we wish to execute
+    rb.setObjectID(reportID);
 
-	  // session used for execution
-	  rb.setSessionInfo(session);
+    // session used for execution
+    rb.setSessionInfo(session);
 
-	  //Executing Datamart report.
-	  System.out.println("Executing Data Mart Report");
+    //Executing Datamart report.
+    System.out.println("Executing Data Mart Report");
 
-	  try {
-		  //Note: Te report is executed when rb.isPrompted() is invoked so setting the appropriate flag before calling rb.isPrompted() method.
-		  rb.setExecutionFlags(rb.getExecutionFlags() | EnumDSSXMLExecutionFlags.DssXmlExecutionGenerateDatamart);
+    try {
+      //Note: Te report is executed when rb.isPrompted() is invoked so setting the appropriate flag before calling rb.isPrompted() method.
+      rb.setExecutionFlags(rb.getExecutionFlags() | EnumDSSXMLExecutionFlags.DssXmlExecutionGenerateDatamart);
 
-		  if (rb.isPrompted()) {
-			  System.out.println("Report has prompts.");
-			  WebReportInstance reportInstance = rb.getReportInstance();
-			  WebPrompts prompts = reportInstance.getPrompts();
-			  int promptSize = prompts.size();
-			  System.out.println("Number of Prompts in report: " + promptSize);
+      if (rb.isPrompted()) {
+        System.out.println("Report has prompts.");
+        WebReportInstance reportInstance = rb.getReportInstance();
+        WebPrompts prompts = reportInstance.getPrompts();
+        int promptSize = prompts.size();
+        System.out.println("Number of Prompts in report: " + promptSize);
 
-			  for (int i = 0; i < prompts.size(); i++) {
-				  WebPrompt prompt = prompts.get(i);
-				  int promptType = prompt.getPromptType();
-				  System.out.println("Prompt type: " + promptType);
+          for (int i = 0; i < prompts.size(); i++) {
+            WebPrompt prompt = prompts.get(i);
+            int promptType = prompt.getPromptType();
+            System.out.println("Prompt type: " + promptType);
 
-				  if ( promptType == EnumWebPromptType.WebPromptTypeConstant) {
-					  System.out.println("Web prompt type: constant");
-					  WebConstantPrompt constantPrompt =  (WebConstantPrompt) prompt;
-					  constantPrompt.setAnswer(promptAnswer);
-				  }
-			  }//End for.
+            if ( promptType == EnumWebPromptType.WebPromptTypeConstant) {
+              System.out.println("Web prompt type: constant");
+              WebConstantPrompt constantPrompt =  (WebConstantPrompt) prompt;
+              constantPrompt.setAnswer(promptAnswer);
+            }
+          }//End for.
 
-			  prompts.validate();
-			  prompts.answerPrompts();
+          prompts.validate();
+          prompts.answerPrompts();
+      }
+      else {
+        System.out.println("Reprot has no prompts.");
+      }
 
-		  }
-		  else {
-			  System.out.println("Reprot has no prompts.");
-		  }
+      //Executing datamart report.
+      rb.getReportInstance().setAsync(true);
+      rb.getReportInstance().pollStatus();
+      rb.collectData();
 
-		  //Executing datamart report.
-		  rb.getReportInstance().setAsync(true);
-		  rb.getReportInstance().pollStatus();
-		  rb.collectData();
+      /*
+      * Report execution status.
+      * 3 = successful 
+      * 6 = waiting for user input
+      * https://lw.microstrategy.com/msdz/MSDL/GARelease_Current/docs/ReferenceFiles/reference/com/microstrategy/web/beans/EnumRequestStatus.html
+      */
 
-		  /*
-		   * Report execution status.
-		   * 3 = successful 
-		   * 6 = waiting for user input
-		   * https://lw.microstrategy.com/msdz/MSDL/GARelease_Current/docs/ReferenceFiles/reference/com/microstrategy/web/beans/EnumRequestStatus.html
-		   */
-
-		  System.out.println("Execution complete! XML status: " + rb.getXMLStatus());
-	  } catch (WebBeanException | WebObjectsException e) {
-		  e.printStackTrace();
-	  }
+      System.out.println("Execution complete! XML status: " + rb.getXMLStatus());
+    } catch (WebBeanException | WebObjectsException e) {
+      e.printStackTrace();
+    }
   }//End executeDataMartReport.
 }
