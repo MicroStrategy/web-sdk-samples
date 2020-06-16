@@ -31,13 +31,13 @@ public class DataMart {
     executeDataMart(reportID, session);
     
     // The GUID of the data mart report with prompts to use
- 	String promptedReportID = "5FE1427B4F07AFCF7279FF9053BC5C4F";
+    String promptedReportID = "5FE1427B4F07AFCF7279FF9053BC5C4F";
 
- 	//Answer to the prompt.
- 	String promptAnswer = "01/06/2014";
- 		
- 	//Execute report Datamart when prompt is required.
- 	executeDataMartWithPrompt(promptedReportID, session, promptAnswer);
+    //Answer to the prompt.
+    String promptAnswer = "01/06/2014";
+
+    //Execute report Datamart when prompt is required.
+    executeDataMartWithPrompt(promptedReportID, session, promptAnswer);
   }
   
   // Simple example to execute a data mart report, without any prompt requirements
