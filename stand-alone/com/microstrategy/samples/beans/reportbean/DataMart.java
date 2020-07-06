@@ -73,6 +73,12 @@ public class DataMart {
   
   
   // Simple example to execute a data mart report. Takes into account if he report is prompted.
+  /**
+   * Function to execute a datamart report with prompts
+   * @param String reportID - ID of the report to be executed. 
+   * @param WebIServerSession session - Session used to execute the report
+   * @param String promptAnswer - Prompt answers to execute the report
+   */
   public static void executeDataMartWithPrompt(String reportID, WebIServerSession session, String promptAnswer) {
     ReportBean rb = (ReportBean)BeanFactory.getInstance().newBean("ReportBean");
 
