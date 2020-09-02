@@ -38,7 +38,7 @@ public class ListSubscriptions {
   }
   
   /**
-   * 
+   * Returns a list of subscriptions.
    * @param iServerSession
    * @return SimpleList - List of subscriptions
    */
@@ -49,7 +49,6 @@ public class ListSubscriptions {
     
     try {
       subscriptionsList = subscriptionsSource.getSubscriptions();
-      System.out.println("stop");
     } 
     catch (WebObjectsException e) {
       e.printStackTrace();
@@ -59,7 +58,7 @@ public class ListSubscriptions {
   }
   
   /**
-   * 
+   * Print a specific subscription's content
    * @param subscription - Subscription containing the info to print
    */
   private static void printSubscriptionContent(WebSubscription subscription) {
