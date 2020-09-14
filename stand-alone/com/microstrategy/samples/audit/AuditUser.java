@@ -19,13 +19,13 @@ public class AuditUser {
   public static void main(String[] args) {
   
     // Set server connection information
-    String intelligenceServerName = "10.23.1.124"; 
-    String projectName = "MicroStrategy Tutorial"; 
-    String microstrategyUsername =  "administrator";
-    String microstrategyPassword = "";
+    final String INTELLIGENCE_SERVER_NAME = "10.23.3.184";
+    final String PROJECT_NAME = "MicroStrategy Tutorial";
+    final String MICROSTRATEGY_USERNAME = "Administrator";
+    final String MICROSTRATEGY_PASSWORD = "";
 
     // Create an IServer session
-    WebIServerSession iServerSession = SessionManager.getSessionWithDetails(intelligenceServerName, projectName, microstrategyUsername, microstrategyPassword);
+    WebIServerSession iServerSession = SessionManager.getSessionWithDetails(INTELLIGENCE_SERVER_NAME, PROJECT_NAME, MICROSTRATEGY_USERNAME, MICROSTRATEGY_PASSWORD);
     WebObjectsFactory factory = iServerSession.getFactory();
     WebObjectSource objectSource = factory.getObjectSource();
 
