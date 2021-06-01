@@ -13,8 +13,10 @@ import com.microstrategy.web.objects.admin.licensing.UserLicenseAudit;
 import com.microstrategy.web.objects.admin.users.WebUserEntity;
 import com.microstrategy.webapi.EnumDSSXMLObjectTypes;
 
-
-//Standalone class to  present audit information
+/**
+ * Show audit information for every user in a MicroStrategy environment.
+ * This example presents the number unlicensed users and also the number of licensed users per license type.
+ */
 public class AuditUser {
   public static void main(String[] args) {
   
