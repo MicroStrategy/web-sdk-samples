@@ -10,6 +10,7 @@ import com.microstrategy.web.objects.WebIServerSession;
 import com.microstrategy.web.objects.WebObjectsException;
 import com.microstrategy.web.objects.WebObjectsFactory;
 import com.microstrategy.web.objects.WebSourceManipulator;
+import com.microstrategy.webapi.EnumDSSXMLSourceManipulatorFlags;
 
 public class ImportPackage {
 
@@ -29,7 +30,7 @@ public class ImportPackage {
         String myPackagePath = "C:\\Users\\ddechent\\Documents\\MMPTest\\RESTAPIPackage.mmp";
 
         WebSourceManipulator wsm = wof.getObjectSource().getSourceManipulator();
-        importPackage(wsm, myPackagePath);
+        importPackage(wsm, myPackagePath, true);
 
     }
 
@@ -38,12 +39,18 @@ public class ImportPackage {
      * 
      * @param wsm
      * @param myPackagePath
+     * @param updateTimestamp
      */
-    public static void importPackage(WebSourceManipulator wsm, String absolutePathToFile) {
+    public static void importPackage(WebSourceManipulator wsm, String absolutePathToFile, Boolean updateTimestamp) {
         try {
             System.out.println("Opening File and importing the package");
             File myPackagePath = new File(absolutePathToFile);
             FileInputStream fis = new FileInputStream(myPackagePath);
+
+            if(updateTimestamp) {
+                wsm.setFlag(EnumDSSXMLSourceManipulatorFlags.DssSourceManipulatorChangeModificationTime);
+            }
+
             wsm.applyDeltaPackage(fis, myPackagePath.length());
             wsm.invoke();
             fis.close();
